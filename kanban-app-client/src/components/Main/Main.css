@@ -1,0 +1,4 @@
+.Main {
+	background-color: var(--main-bg);
+	flex-grow: 1;
+}

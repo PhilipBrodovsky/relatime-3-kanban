@@ -1,0 +1,14 @@
+.items {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	margin-top: 24px;
+}
+
+.item {
+	width: 120px;
+	height: 40px;
+	box-shadow: 0px 4px 4px #00000025;
+	border-radius: 8px;
+	padding: 8px;
+}

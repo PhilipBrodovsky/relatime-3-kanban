@@ -1,0 +1,34 @@
+* {
+	box-sizing: border-box;
+}
+
+/* html */
+:root {
+	--main-bg: #e4ebfa;
+	--paper-bg: white;
+}
+
+:root.dark {
+	--main-bg: #20212c;
+	--paper-bg: #2b2c37;
+}
+
+body {
+	margin: 0;
+}
+
+.app {
+	height: 100vh;
+	display: flex;
+}
+
+.left {
+	width: 300px;
+	border: 1px solid #979797;
+}
+
+.right {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}

@@ -1,0 +1,27 @@
+.btn {
+	cursor: pointer;
+}
+
+.red {
+	color: red;
+}
+.btn.primary {
+	background: #635fc7;
+	color: white;
+}
+.btn.secondary {
+	background: #d9d9d9;
+	color: #635fc7;
+}
+
+.btn.sm {
+	height: 40px;
+	border-radius: 20px;
+	font-size: 20px;
+}
+
+.btn.lg {
+	height: 48px;
+	border-radius: 24px;
+	font-size: 24px;
+}
