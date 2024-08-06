@@ -1,9 +1,11 @@
 import "./Main.css";
 
-export function Main({ board, openEditBoardModal }) {
+export function Main({ board, openEditBoardModal, isAddColumnDisabled }) {
 	const boardName = board ? board.name : "select board";
 
 	const columns = board?.columns || [];
+
+	console.log("isAddColumnDisabled", isAddColumnDisabled);
 
 	return (
 		<div className={`Main`}>
@@ -16,7 +18,9 @@ export function Main({ board, openEditBoardModal }) {
 						</div>
 					);
 				})}
-				<button onClick={openEditBoardModal}>add new column</button>
+				<button disabled={isAddColumnDisabled} onClick={openEditBoardModal}>
+					add new column
+				</button>
 			</div>
 		</div>
 	);

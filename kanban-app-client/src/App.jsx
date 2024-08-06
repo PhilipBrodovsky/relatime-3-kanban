@@ -18,6 +18,8 @@ function App() {
 	const [boards, setBoards] = useState([]);
 	const [selectedBoardId, setSelectedBoardId] = useState("");
 
+	const isBoardSelected = !!selectedBoardId;
+
 	const [isLoading, setIsLoading] = useState(false);
 	const selectedBoard = boards.find((board) => board.id === selectedBoardId);
 
@@ -79,9 +81,13 @@ function App() {
 			</div>
 			<div className="right">
 				<Header />
-				<Main openEditBoardModal={openEditBoardModal} board={selectedBoard} />
+				<Main
+					isAddColumnDisabled={!isBoardSelected}
+					openEditBoardModal={openEditBoardModal}
+					board={selectedBoard}
+				/>
 			</div>
-			{isOpenEditBoard && <EditBoardModal close={closeEditBoardModal} />}
+			{isOpenEditBoard && <EditBoardModal board={selectedBoard} close={closeEditBoardModal} />}
 		</div>
 	);
 }

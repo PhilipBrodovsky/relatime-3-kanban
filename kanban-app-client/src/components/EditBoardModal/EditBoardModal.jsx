@@ -1,6 +1,6 @@
 import "./EditBoardModal.css";
 
-export function EditBoardModal({ close }) {
+export function EditBoardModal({ close, board }) {
 	return (
 		<div onClick={() => close?.()} className="EditBoardModal">
 			<div
@@ -9,7 +9,7 @@ export function EditBoardModal({ close }) {
 				}}
 				className="EditBoardModal-content"
 			>
-				content
+				<input type="text" defaultValue={board?.name} />
 			</div>
 		</div>
 	);
