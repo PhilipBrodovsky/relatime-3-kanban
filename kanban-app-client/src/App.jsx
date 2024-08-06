@@ -4,6 +4,7 @@ import { Header } from "./components/Header/Header";
 import { Main } from "./components/Main/Main";
 import { useState, useEffect, useRef } from "react";
 import Button from "./components/Button/Button";
+import { EditBoardModal } from "./components/EditBoardModal/EditBoardModal";
 
 async function getBoards() {
 	const res = await fetch("http://localhost:4000/api/boards");
@@ -20,9 +21,7 @@ function App() {
 	const [isLoading, setIsLoading] = useState(false);
 	const selectedBoard = boards.find((board) => board.id === selectedBoardId);
 
-	console.log("boards", boards);
-	console.log("selectedBoardId", selectedBoardId);
-	console.log("selectedBoard", selectedBoard);
+	const [isOpenEditBoard, setIsOpenEditBoard] = useState(false);
 
 	async function createBoard(form) {
 		// update server
@@ -39,6 +38,14 @@ function App() {
 
 		// update state(ui)
 		setBoards([...boards, newBoard]);
+	}
+
+	function openEditBoardModal() {
+		setIsOpenEditBoard(true);
+	}
+
+	function closeEditBoardModal() {
+		setIsOpenEditBoard(false);
 	}
 
 	useEffect(() => {
@@ -72,8 +79,9 @@ function App() {
 			</div>
 			<div className="right">
 				<Header />
-				<Main board={selectedBoard} />
+				<Main openEditBoardModal={openEditBoardModal} board={selectedBoard} />
 			</div>
+			{isOpenEditBoard && <EditBoardModal close={closeEditBoardModal} />}
 		</div>
 	);
 }

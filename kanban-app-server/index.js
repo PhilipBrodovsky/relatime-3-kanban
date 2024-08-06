@@ -9,14 +9,17 @@ const boards = [
 	{
 		id: 1,
 		name: "developers",
+		columns: [{ id: 1, name: "to do" }],
 	},
 	{
 		id: 2,
 		name: "products",
+		columns: [],
 	},
 	{
 		id: 3,
 		name: "designers",
+		columns: [],
 	},
 ];
 
