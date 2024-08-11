@@ -1,6 +1,10 @@
 import { createContext, useContext, useState } from "react";
 
-export const AppContext = createContext(null);
+export const AppContext = createContext({
+	boards: [],
+	selectedBoardId: "",
+	setSelectedBoardId: () => {},
+});
 
 export function AppContextProvider({ children }) {
 	const [boards, setBoards] = useState([]);

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import { AppContextProvider } from "./contexts/AppContext.jsx";
+import { AppContextProvider, useAppContext } from "./contexts/AppContext.jsx";
 
 const container = document.getElementById("root");
 
