@@ -1,11 +1,15 @@
+import { useAppContext } from "../../contexts/AppContext";
 import "./Main.css";
 
-export function Main({ board, openEditBoardModal, isAddColumnDisabled }) {
-	const boardName = board ? board.name : "select board";
+export function Main({ openEditBoardModal }) {
+	const appContext = useAppContext();
+	const { selectedBoard } = appContext;
 
-	const columns = board?.columns || [];
+	const boardName = selectedBoard ? selectedBoard.name : "select board";
 
-	console.log("isAddColumnDisabled", isAddColumnDisabled);
+	const columns = selectedBoard?.columns || [];
+
+	const isAddColumnDisabled = !selectedBoard;
 
 	return (
 		<div className={`Main`}>

@@ -1,6 +1,9 @@
+import { useAppContext } from "../../contexts/AppContext";
 import "./EditBoardModal.css";
 
-export function EditBoardModal({ close, board }) {
+export function EditBoardModal({ close }) {
+	const appContext = useAppContext();
+	const { selectedBoard } = appContext;
 	return (
 		<div onClick={() => close?.()} className="EditBoardModal">
 			<div
@@ -9,7 +12,7 @@ export function EditBoardModal({ close, board }) {
 				}}
 				className="EditBoardModal-content"
 			>
-				<input type="text" defaultValue={board?.name} />
+				<input type="text" defaultValue={selectedBoard?.name} />
 			</div>
 		</div>
 	);

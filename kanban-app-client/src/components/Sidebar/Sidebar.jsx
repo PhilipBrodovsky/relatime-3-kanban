@@ -1,10 +1,17 @@
 import { useState } from "react";
 import "./Sidebar.css";
+import { useAppContext } from "../../contexts/AppContext";
 
 export function Sidebar(props) {
-	const { setIsDarkMode, boards = [], createBoard, selectedBoardId, setSelectedBoardId } = props;
+	const { setIsDarkMode } = props;
 
 	const [text, setText] = useState("");
+
+	const appContext = useAppContext();
+
+	const { boards, createBoard, selectedBoardId, setSelectedBoardId } = appContext;
+
+	console.log("sidebar.appContext", appContext);
 
 	// derived state
 	const totalBoards = boards.length;
