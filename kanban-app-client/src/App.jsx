@@ -6,6 +6,9 @@ import { useState, useEffect } from "react";
 import { EditBoardModal } from "./components/EditBoardModal/EditBoardModal";
 import { useAppContext } from "./contexts/AppContext";
 
+import { useDispatch, useSelector } from "react-redux";
+import { themeSlice } from "./store";
+
 async function getBoards() {
 	const res = await fetch("http://localhost:4000/api/boards");
 	const body = await res.json();
@@ -14,9 +17,13 @@ async function getBoards() {
 
 //  render app -> useEffect -> setState -> render app -> ......
 function App() {
-	const [isDarkMode, setIsDarkMode] = useState(false);
+	const isDarkMode = useSelector((state) => {
+		return state?.theme?.isDarkMode;
+	});
 
 	const appContext = useAppContext();
+
+	const dispatch = useDispatch();
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -34,7 +41,7 @@ function App() {
 		setIsLoading(true);
 		getBoards().then((data) => {
 			console.log("data", data);
-			appContext.setBoards?.(data);
+			appContext.setBoards?.(data); // save in state
 			setIsLoading(false);
 		});
 	}, []);
@@ -49,7 +56,7 @@ function App() {
 				<Sidebar
 					isDarkMode={isDarkMode}
 					setIsDarkMode={() => {
-						setIsDarkMode(!isDarkMode);
+						dispatch(themeSlice.actions.toggleTheme());
 						// html element to be dark
 						document.documentElement.classList.toggle("dark", !isDarkMode);
 					}}
