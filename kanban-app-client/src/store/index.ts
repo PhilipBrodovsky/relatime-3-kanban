@@ -1,22 +1,14 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import { themeSlice } from "./slices/themeSlice";
+import { boardsSlice } from "./slices/boardsSlice";
 
-export const themeSlice = createSlice({
-	name: "theme",
-	initialState: { isDarkMode: false },
-	reducers: {
-		// action + reducer
-		toggleTheme: (state) => {
-			state.isDarkMode = !state.isDarkMode;
-		},
-		setMode: (state, action) => {
-			state.isDarkMode = action.payload;
-		},
-	},
-});
+export * from "./slices/boardsSlice";
+export * from "./slices/themeSlice";
 
 export const store = configureStore({
 	reducer: {
 		[themeSlice.name]: themeSlice.reducer,
+		[boardsSlice.name]: boardsSlice.reducer,
 	}, // slices
 });
 

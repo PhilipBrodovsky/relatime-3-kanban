@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./Sidebar.css";
 import { useAppContext } from "../../contexts/AppContext";
+import { useDispatch, useSelector } from "react-redux";
+import { boardsSlice } from "../../store";
 
 export function Sidebar(props) {
 	const { setIsDarkMode } = props;
@@ -9,9 +11,12 @@ export function Sidebar(props) {
 
 	const appContext = useAppContext();
 
-	const { boards, createBoard, selectedBoardId, setSelectedBoardId } = appContext;
+	const boards = useSelector((state) => state.boards?.boards ?? []);
 
-	console.log("sidebar.appContext", appContext);
+	const dispatch = useDispatch();
+	const { createBoard } = appContext;
+
+	const selectedBoardId = useSelector((state) => state.boards.selectedBoardId);
 
 	// derived state
 	const totalBoards = boards.length;
@@ -27,7 +32,7 @@ export function Sidebar(props) {
 						<div
 							key={board.id}
 							onClick={() => {
-								setSelectedBoardId(board.id);
+								dispatch(boardsSlice.actions.selectBoard(board.id));
 							}}
 							style={{
 								background: isSelected ? "#635FC7" : "transparent",

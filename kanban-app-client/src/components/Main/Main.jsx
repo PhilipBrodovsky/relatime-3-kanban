@@ -1,10 +1,13 @@
+import { useSelector } from "react-redux";
 import { useAppContext } from "../../contexts/AppContext";
 import "./Main.css";
+import { boardsSlice } from "../../store";
 
 export function Main({ openEditBoardModal }) {
 	const appContext = useAppContext();
-	const { selectedBoard } = appContext;
 
+	const selectedBoard = useSelector(boardsSlice.selectors.selectedBoard);
+	console.log("selectedBoard", selectedBoard);
 	const boardName = selectedBoard ? selectedBoard.name : "select board";
 
 	const columns = selectedBoard?.columns || [];

@@ -7,7 +7,7 @@ import { EditBoardModal } from "./components/EditBoardModal/EditBoardModal";
 import { useAppContext } from "./contexts/AppContext";
 
 import { useDispatch, useSelector } from "react-redux";
-import { themeSlice } from "./store";
+import { boardsSlice, themeSlice } from "./store";
 
 async function getBoards() {
 	const res = await fetch("http://localhost:4000/api/boards");
@@ -41,7 +41,7 @@ function App() {
 		setIsLoading(true);
 		getBoards().then((data) => {
 			console.log("data", data);
-			appContext.setBoards?.(data); // save in state
+			dispatch(boardsSlice.actions.setBoards(data));
 			setIsLoading(false);
 		});
 	}, []);
