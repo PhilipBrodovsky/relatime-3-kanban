@@ -12,6 +12,11 @@ export const boardsSlice = createSlice({
 		addBoard: (state, action) => {
 			state.boards.push(action.payload);
 		},
+		editBoard: (state, action) => {
+			const index = state.boards.findIndex((b) => b.id === action.payload.id);
+			if (index === -1) return; // not found
+			state.boards[index] = action.payload;
+		},
 	},
 	selectors: {
 		selectedBoard: (sliceState, selectedBoardName) => {

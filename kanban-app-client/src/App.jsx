@@ -3,7 +3,7 @@ import { Sidebar } from "./components/Sidebar/Sidebar";
 import { Header } from "./components/Header/Header";
 import { Main } from "./components/Main/Main";
 import { useState, useEffect } from "react";
-import { EditBoardModal } from "./components/EditBoardModal/EditBoardModal";
+import { BoardFormModal } from "./components/BoardFormModal/BoardFormModal";
 import { useAppContext } from "./contexts/AppContext";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -27,14 +27,18 @@ function App() {
 
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [isOpenEditBoard, setIsOpenEditBoard] = useState(false);
+	const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
+	const [boardToEdit, setBoardToEdit] = useState(null);
+	console.log("boardToEdit", boardToEdit);
 
-	function openEditBoardModal() {
-		setIsOpenEditBoard(true);
+	function openModal(board) {
+		setIsBoardModalOpen(true);
+		setBoardToEdit(board ?? null);
 	}
 
-	function closeEditBoardModal() {
-		setIsOpenEditBoard(false);
+	function closeModal() {
+		setIsBoardModalOpen(false);
+		setBoardToEdit(null);
 	}
 
 	useEffect(() => {
@@ -54,6 +58,7 @@ function App() {
 		<div className="app">
 			<div className="left">
 				<Sidebar
+					onCreateBoard={openModal}
 					isDarkMode={isDarkMode}
 					setIsDarkMode={() => {
 						dispatch(themeSlice.actions.toggleTheme());
@@ -64,9 +69,9 @@ function App() {
 			</div>
 			<div className="right">
 				<Header />
-				<Main openEditBoardModal={openEditBoardModal} />
+				<Main openEditBoardModal={openModal} />
 			</div>
-			{isOpenEditBoard && <EditBoardModal close={closeEditBoardModal} />}
+			{isBoardModalOpen && <BoardFormModal close={closeModal} boardToEdit={boardToEdit} />}
 		</div>
 	);
 }

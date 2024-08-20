@@ -44,7 +44,7 @@ export function Sidebar(props) {
 				})}
 				<button
 					onClick={() => {
-						createBoard({ name: text });
+						props.onCreateBoard?.();
 					}}
 				>
 					create new board

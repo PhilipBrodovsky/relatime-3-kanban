@@ -14,7 +14,6 @@ export function Main({ openEditBoardModal }) {
 	const selectedBoard = useSelector((state) =>
 		boardsSlice.selectors.selectedBoard(state, selectedBoardName)
 	);
-	console.log("selectedBoard", selectedBoard);
 	const boardName = selectedBoard ? selectedBoard.name : "select board";
 
 	const columns = selectedBoard?.columns || [];
@@ -32,7 +31,12 @@ export function Main({ openEditBoardModal }) {
 						</div>
 					);
 				})}
-				<button disabled={isAddColumnDisabled} onClick={openEditBoardModal}>
+				<button
+					disabled={isAddColumnDisabled}
+					onClick={() => {
+						openEditBoardModal(selectedBoard);
+					}}
+				>
 					add new column
 				</button>
 			</div>

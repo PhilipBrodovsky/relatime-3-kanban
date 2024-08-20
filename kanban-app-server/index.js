@@ -5,6 +5,10 @@ const app = express();
 app.use(cors({}));
 app.use(express.json({}));
 
+// Task { name(string), description(string) status(todo | doing | done), subTasks([{id, name }]) }
+// Column {id(string), name(string), tasks: []}
+// Board {id(string), name(string), columns(Columns[])}
+
 const boards = [
 	{
 		id: 1,
@@ -31,15 +35,28 @@ app.get("/api/boards", (req, res) => {
 	}, 2000);
 });
 
-// create new board
-app.post("/api/boards", (req, res) => {
-	const { name } = req.body;
+// edit board
+app.put("/api/boards", (req, res) => {
+	const { board } = req.body;
 
-	console.log("req.body", req.body);
+	const existsBoardIndex = boards.findIndex((b) => b.id === board.id);
+
+	// update db
+	if (existsBoardIndex !== -1) {
+		boards[existsBoardIndex] = board;
+	}
+
+	res.json(board);
+});
+
+//  create
+app.post("/api/boards", (req, res) => {
+	const { board } = req.body;
 
 	const id = crypto.randomUUID();
+	const newBoard = { ...board, id };
 
-	const newBoard = { id, name };
+	boards.push(newBoard); // update db
 
 	res.json(newBoard);
 });
