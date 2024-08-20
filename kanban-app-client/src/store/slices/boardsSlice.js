@@ -4,7 +4,6 @@ export const boardsSlice = createSlice({
 	name: "boards",
 	initialState: {
 		boards: [],
-		selectedBoardId: "",
 	},
 	reducers: {
 		setBoards: (state, action) => {
@@ -13,15 +12,10 @@ export const boardsSlice = createSlice({
 		addBoard: (state, action) => {
 			state.boards.push(action.payload);
 		},
-		selectBoard(state, action) {
-			state.selectedBoardId = action.payload;
-		},
 	},
 	selectors: {
-		selectedBoard: (sliceState) => {
-			const selectedBoard = sliceState.boards.find(
-				(board) => board.id === sliceState.selectedBoardId
-			);
+		selectedBoard: (sliceState, selectedBoardName) => {
+			const selectedBoard = sliceState.boards.find((board) => board.name === selectedBoardName);
 
 			return selectedBoard;
 		},

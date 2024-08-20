@@ -1,22 +1,24 @@
 import { useState } from "react";
 import "./Sidebar.css";
 import { useAppContext } from "../../contexts/AppContext";
-import { useDispatch, useSelector } from "react-redux";
-import { boardsSlice } from "../../store";
+import { useSelector } from "react-redux";
+import { Link } from "wouter";
+import { useParams } from "wouter";
 
 export function Sidebar(props) {
 	const { setIsDarkMode } = props;
 
 	const [text, setText] = useState("");
 
+	const params = useParams();
+
+	const selectedBoardName = params?.boardName;
+
 	const appContext = useAppContext();
 
 	const boards = useSelector((state) => state.boards?.boards ?? []);
 
-	const dispatch = useDispatch();
 	const { createBoard } = appContext;
-
-	const selectedBoardId = useSelector((state) => state.boards.selectedBoardId);
 
 	// derived state
 	const totalBoards = boards.length;
@@ -27,19 +29,16 @@ export function Sidebar(props) {
 			<h3>all boards ({totalBoards})</h3>
 			<div className="">
 				{boards.map((board) => {
-					const isSelected = board.id === selectedBoardId;
+					const isSelected = board.name === selectedBoardName;
 					return (
 						<div
 							key={board.id}
-							onClick={() => {
-								dispatch(boardsSlice.actions.selectBoard(board.id));
-							}}
 							style={{
 								background: isSelected ? "#635FC7" : "transparent",
 							}}
 							className="board"
 						>
-							{board.name}
+							<Link href={`/${board.name}`}>{board.name}</Link>
 						</div>
 					);
 				})}
