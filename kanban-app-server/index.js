@@ -11,17 +11,17 @@ app.use(express.json({}));
 
 const boards = [
 	{
-		id: 1,
+		id: "1",
 		name: "developers",
 		columns: [{ id: 1, name: "to do" }],
 	},
 	{
-		id: 2,
+		id: "2",
 		name: "products",
 		columns: [],
 	},
 	{
-		id: 3,
+		id: "3",
 		name: "designers",
 		columns: [],
 	},
@@ -33,6 +33,20 @@ app.get("/api/boards", (req, res) => {
 		// load from db
 		res.json(boards);
 	}, 2000);
+});
+
+// delete board
+app.delete("/api/boards/:id", (req, res) => {
+	const { id } = req.params;
+
+	const existsBoardIndex = boards.findIndex((b) => b.id === id);
+
+	// update db
+	if (existsBoardIndex !== -1) {
+		const [deletedBoard] = boards.splice(existsBoardIndex, 1);
+		return res.json(deletedBoard);
+	}
+	res.status(400).json({ message: "not found" });
 });
 
 // edit board

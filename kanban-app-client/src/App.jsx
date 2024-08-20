@@ -29,7 +29,6 @@ function App() {
 
 	const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
 	const [boardToEdit, setBoardToEdit] = useState(null);
-	console.log("boardToEdit", boardToEdit);
 
 	function openModal(board) {
 		setIsBoardModalOpen(true);
@@ -44,7 +43,6 @@ function App() {
 	useEffect(() => {
 		setIsLoading(true);
 		getBoards().then((data) => {
-			console.log("data", data);
 			dispatch(boardsSlice.actions.setBoards(data));
 			setIsLoading(false);
 		});

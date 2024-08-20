@@ -17,6 +17,11 @@ export const boardsSlice = createSlice({
 			if (index === -1) return; // not found
 			state.boards[index] = action.payload;
 		},
+		deleteBoard: (state, action) => {
+			const index = state.boards.findIndex((b) => b.id === action.payload);
+			if (index === -1) return; // not found
+			state.boards.splice(index, 1);
+		},
 	},
 	selectors: {
 		selectedBoard: (sliceState, selectedBoardName) => {

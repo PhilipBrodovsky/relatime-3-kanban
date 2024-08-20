@@ -1,6 +1,6 @@
-async function request({ method = "GET", body } = {}) {
+async function request({ method = "GET", body, param } = {}) {
 	// update server
-	const res = await fetch("http://localhost:4000/api/boards", {
+	const res = await fetch(`http://localhost:4000/api/boards${param ? `/${param}` : ""}`, {
 		headers: {
 			"content-type": "application/json",
 		},
@@ -19,6 +19,12 @@ export const Api = {
 		return request({
 			method: "POST",
 			body: { board },
+		});
+	},
+	deleteBoard(id) {
+		return request({
+			method: "DELETE",
+			param: id,
 		});
 	},
 	editBoard(board) {
