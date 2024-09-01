@@ -20,25 +20,34 @@ export function Main({ openEditBoardModal }) {
 
 	const isAddColumnDisabled = !selectedBoard;
 
+	console.log("columns", columns);
+
+	const isEmptyState = !columns.length;
+
 	return (
 		<div className={`Main`}>
 			<h2>{boardName}</h2>
 			<div className="">
-				{columns.map((column) => {
-					return (
-						<div key={column.id} className="">
-							{column.name}
-						</div>
-					);
-				})}
-				<button
-					disabled={isAddColumnDisabled}
-					onClick={() => {
-						openEditBoardModal(selectedBoard);
-					}}
-				>
-					add new column
-				</button>
+				{!isEmptyState &&
+					columns.map((column) => {
+						return (
+							<div key={column.id} className="">
+								{column.name}
+							</div>
+						);
+					})}
+				{isEmptyState && (
+					<div className="">
+						<button
+							disabled={isAddColumnDisabled}
+							onClick={() => {
+								openEditBoardModal(selectedBoard);
+							}}
+						>
+							add new column
+						</button>
+					</div>
+				)}
 			</div>
 		</div>
 	);

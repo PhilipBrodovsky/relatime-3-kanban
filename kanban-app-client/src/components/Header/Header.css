@@ -1,4 +1,35 @@
 .Header {
 	background-color: white;
 	height: 97px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	justify-content: space-between;
+	padding: 16px;
+}
+
+.Header .actions {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.menuItems {
+	background-color: white;
+	padding: 16px;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	cursor: pointer;
+}
+
+.menuItem {
+	background-color: white;
+	padding: 16px;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	cursor: pointer;
 }
