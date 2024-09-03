@@ -70,11 +70,13 @@ export function Sidebar(props) {
 					<button onClick={closeSidebar}>close sidebar</button>
 				</div>
 			</div>
-			{!sidebarIsOpen && (
-				<button onClick={() => setSidebarIsOpen(true)} className="open-sidebar">
-					open
-				</button>
-			)}
+
+			<button
+				onClick={() => setSidebarIsOpen(true)}
+				className={`open-sidebar ${sidebarIsOpen ? "hide" : ""}`}
+			>
+				open
+			</button>
 		</>
 	);
 }
