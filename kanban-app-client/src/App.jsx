@@ -54,17 +54,15 @@ function App() {
 
 	return (
 		<div className="app">
-			<div className="left">
-				<Sidebar
-					onCreateBoard={openModal}
-					isDarkMode={isDarkMode}
-					setIsDarkMode={() => {
-						dispatch(themeSlice.actions.toggleTheme());
-						// html element to be dark
-						document.documentElement.classList.toggle("dark", !isDarkMode);
-					}}
-				/>
-			</div>
+			<Sidebar
+				onCreateBoard={openModal}
+				isDarkMode={isDarkMode}
+				setIsDarkMode={() => {
+					dispatch(themeSlice.actions.toggleTheme());
+					// html element to be dark
+					document.documentElement.classList.toggle("dark", !isDarkMode);
+				}}
+			/>
 			<div className="right">
 				<Header />
 				<Main openEditBoardModal={openModal} />

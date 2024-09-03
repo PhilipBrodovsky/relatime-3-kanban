@@ -10,7 +10,13 @@ export function Sidebar(props) {
 
 	const [text, setText] = useState("");
 
+	const [sidebarIsOpen, setSidebarIsOpen] = useState(true);
+
 	const params = useParams();
+
+	function closeSidebar() {
+		setSidebarIsOpen(false);
+	}
 
 	const selectedBoardName = params?.boardName;
 
@@ -24,41 +30,51 @@ export function Sidebar(props) {
 	const totalBoards = boards.length;
 
 	return (
-		<div className={`Sidebar`}>
-			<input onChange={(e) => setText(e.target.value)} type="text" />
-			<h3>all boards ({totalBoards})</h3>
-			<div className="">
-				{boards.map((board) => {
-					const isSelected = board.name === selectedBoardName;
-					return (
-						<div
-							key={board.id}
-							style={{
-								background: isSelected ? "#635FC7" : "transparent",
-							}}
-							className="board"
-						>
-							<Link href={`/${board.name}`}>{board.name}</Link>
-						</div>
-					);
-				})}
-				<button
-					onClick={() => {
-						props.onCreateBoard?.();
-					}}
-				>
-					create new board
-				</button>
+		<>
+			<div className={`Sidebar ${sidebarIsOpen ? "open" : ""}`}>
+				<input onChange={(e) => setText(e.target.value)} type="text" />
+				<h3>all boards ({totalBoards})</h3>
+				<div className="">
+					{boards.map((board) => {
+						const isSelected = board.name === selectedBoardName;
+						return (
+							<div
+								key={board.id}
+								style={{
+									background: isSelected ? "#635FC7" : "transparent",
+								}}
+								className="board"
+							>
+								<Link href={`/${board.name}`}>{board.name}</Link>
+							</div>
+						);
+					})}
+					<button
+						onClick={() => {
+							props.onCreateBoard?.();
+						}}
+					>
+						create new board
+					</button>
+				</div>
+				<label className="switch">
+					<input
+						onChange={(event) => {
+							setIsDarkMode(event.target.checked);
+						}}
+						type="checkbox"
+					/>
+					<span className="slider round"></span>
+				</label>
+				<div className="">
+					<button onClick={closeSidebar}>close sidebar</button>
+				</div>
 			</div>
-			<label className="switch">
-				<input
-					onChange={(event) => {
-						setIsDarkMode(event.target.checked);
-					}}
-					type="checkbox"
-				/>
-				<span className="slider round"></span>
-			</label>
-		</div>
+			{!sidebarIsOpen && (
+				<button onClick={() => setSidebarIsOpen(true)} className="open-sidebar">
+					open
+				</button>
+			)}
+		</>
 	);
 }
